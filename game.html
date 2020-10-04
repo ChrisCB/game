@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>Mae's Game</title>
+    <link rel="stylesheet" href="game.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header>
+        <h1>Mae's Game</h1>
+    </header>
+    <div id="wrapper">
+        <div id="buttonDiv">
+            <a class="myButton" id="pickLetterButton">Draw letters!</a>
+        </div>
+        <div id="scoreDiv">
+            <p id="scoreP">Score: 0</p>
+        </div>
+        <div id="timerDiv">
+            Time: <span id="time">01:46</span>
+        </div>
+        <div id="pickLettersDiv" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <!--Letters go here-->
+        </div>
+        <div id="results" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+        <!-- <a class="myButton" id="newLettersButton">Draw letters!</a> -->
+        <div id="links">
+            <div id="redrawDiv">
+                <a href="#" id="redrawLink">Change letters</a>
+            </div>
+            <div id="redrawDiv">
+                <a href="#" id="checkWord">Check word</a>
+            </div>
+        </div>
+        <div id="instructions">
+            <p>Drag the letters in to the box to make the longest word you can.</p>
+            <p>Once you drop a letter you can't take it back.</p>
+            <p>You have precisely one minute and 46 seconds to finish. If you're too slow... there are no real
+                consequences tbh</p>
+        </div>
+    </div>
+    <!--
+        To Do:
+            Render correctly on mobile
+            Allow take-backs
+            Allow dragging on mobile
+           
+            Prevent moves after timer reaches 0
+            Allow redraw but keep timer going
+            Head to head play (god knows how to do this)
+            Store actual work
+                Link to dictionary to check word
+                Add done button
+                Keep best word in local storage
+
+        Done
+            Score
+            End timer at 0
+            Make timer red at 10 seconds
+            Weight probability of letters occurence by frequency in English
+
+
+    -->
+
+    <script src="game.js"></script>
+</body>
+
+</html>

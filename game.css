@@ -1,0 +1,74 @@
+
+.tile {
+    border-radius: 5px;
+    box-shadow: 2px 2px #888888;
+    background-color: beige;
+    padding: 20px;
+    display: block;
+    float: left;
+    margin: 5px;
+    font-size: larger;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+   
+}
+
+
+#results {
+    width: 650px;;
+    height: 70px;
+    padding: 10px;
+    border: 2px solid #aaaaaa;
+    margin-top: 105px;
+    display: block;
+    background-color:#f1f2f3;
+    background-image:
+        linear-gradient(rgba(0,0,0,.015) 1px, transparent 1px),
+        linear-gradient(0, rgba(0,0,0,.015) 1px, transparent 1px);
+    background-size:5px 5px;
+    background-position:-1px -1px, -1px -1px
+      
+  }
+
+body{
+background-color: aliceblue;    
+font-family: 'Courier New', Courier, monospace;
+font-size: 20px;
+padding: 20px;
+}
+
+#pickLettersDiv{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#timerDiv #scoreDiv {
+   padding: 5px;
+
+}
+
+
+#pickLetterButton {
+	box-shadow:inset 0px 1px 0px 0px #a4e271;
+	background:linear-gradient(to bottom, #89c403 5%, #77a809 100%);
+	background-color:#89c403;
+	border-radius:5px;
+	border:1px solid #74b807;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-weight:bold;
+	padding:10px 71px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528009;
+}
+#pickLetterButton:hover {
+	background:linear-gradient(to bottom, #77a809 5%, #89c403 100%);
+	background-color:#77a809;
+}
+#pickLetterButton:active {
+	position:relative;
+	top:1px;
+}
+
+        
