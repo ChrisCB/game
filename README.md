@@ -11,6 +11,7 @@
     - Link to dictionary to check word
     - Add done button
     - Keep best word in local storage
+- Change the redraw link to a buttom for accessiblity 
 
 ## Done
 - Score
