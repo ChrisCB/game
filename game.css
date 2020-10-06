@@ -1,4 +1,16 @@
 
+body{
+    background-color: aliceblue;    
+    font-family: 'Courier New', Courier, monospace;
+    font-size: clamp(18px, 5vw, 24px);
+    padding: 20px;
+    }
+
+h1 {
+    font-size: clamp(32px, 10vw, 50px);
+
+}
+
 .tile {
     border-radius: 5px;
     box-shadow: 2px 2px #888888;
@@ -7,7 +19,7 @@
     display: block;
     float: left;
     margin: 5px;
-    font-size: larger;
+    font-size: clamp(12px, 5vw, 24px);
     font-family: 'Courier New', Courier, monospace;
     font-weight: bolder;
    
@@ -15,12 +27,12 @@
 
 
 #results {
-    width: 650px;;
+    width: 80vw;
     height: 70px;
     padding: 10px;
     border: 2px solid #aaaaaa;
-    margin-top: 105px;
-    display: block;
+    margin-top: 15px;
+    display:inline-block;
     background-color:#f1f2f3;
     background-image:
         linear-gradient(rgba(0,0,0,.015) 1px, transparent 1px),
@@ -30,12 +42,6 @@
       
   }
 
-body{
-background-color: aliceblue;    
-font-family: 'Courier New', Courier, monospace;
-font-size: 20px;
-padding: 20px;
-}
 
 #pickLettersDiv{
     margin-top: 10px;
@@ -85,5 +91,3 @@ button {
 	position:relative;
 	top:1px;
 }
-
-        
