@@ -104,7 +104,7 @@ function pickLetter() {
   newTile.id = `${letter}`; // Give the new div a unique ID
   newTile.className = 'tile'; // Give the new div a class of tile
   newTile.draggable = 'true'; // Add the 'draggable=true' attribute
-  newTile.setAttribute('ondragstart', 'drag(event)'); // Add ondragstart="drag(event)
+  // newTile.setAttribute('ondragstart', 'drag(event)'); // Add ondragstart="drag(event)
   newTile.innerHTML += letter; // Add the letter in to the tile
 
   pickLettersDiv.appendChild(newTile); // Add the tile in to the row of letters
@@ -112,21 +112,27 @@ function pickLetter() {
   return letterSelection;
 }
 
-// Make the letters draggable
-function allowDrop(ev) {
-  ev.preventDefault();
-}
+// // Make the letters draggable
 
-function drag(ev) {
-  ev.dataTransfer.setData('text', ev.target.id);
-}
+dragula([
+  document.querySelector('#pickLettersDiv'),
+  document.querySelector('#results'),
+]);
 
-function drop(ev) {
-  ev.preventDefault();
-  const data = ev.dataTransfer.getData('text');
-  ev.target.appendChild(document.getElementById(data));
-  scoring(); // This function counts the divs in the 'results' div
-}
+// function allowDrop(ev) {
+//   ev.preventDefault();
+// }
+
+// function drag(ev) {
+//   ev.dataTransfer.setData('text', ev.target.id);
+// }
+
+// function drop(ev) {
+//   ev.preventDefault();
+//   const data = ev.dataTransfer.getData('text');
+//   ev.target.appendChild(document.getElementById(data));
+//   scoring(); // This function counts the divs in the 'results' div
+// }
 
 // Loop through lettersArray and present results on screen - called by startGame & newLetters functions
 function pickLetters() {
