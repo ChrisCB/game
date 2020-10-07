@@ -1,18 +1,18 @@
-// Dependencies (prob drag library)
-
+/* eslint-disable no-new */
 // Define global variables
 const numOfLetters = 10; // How many letters to give the player
 const letterSelection = []; // empy selection array, gets defined in function
 let i = 0; // Iterator for loop to select letters
 const timeAllowed = 106; // How long the player has (controls )
 let timeBgColour = timeAllowed; // Drives the timer BG colour - see https://mothereffinghsl.com/
-let score = 0; // Set the starting score to 0
 
 const display = document.querySelector('#time');
 const pickLettersDiv = document.getElementById('pickLettersDiv');
 const drawLetterButton = document.querySelector('#pickLetterButton'); // The "Draw letters buttom"
 const resultsDiv = document.getElementById('results'); // The box you drag in to
 const changeLetterButton = document.getElementById('redrawButton'); // The link to get new letters
+const doneButton = document.getElementById('doneButton'); // The link to get new letters
+const scoreP = document.getElementById('scoreP');
 
 // Pick an individual letter. Probablity based on frequency of letter in English.
 function pickLetter() {
@@ -112,27 +112,17 @@ function pickLetter() {
   return letterSelection;
 }
 
-// // Make the letters draggable
+// // Make the letters draggable (via the Sortable CDN)
 
-dragula([
-  document.querySelector('#pickLettersDiv'),
-  document.querySelector('#results'),
-]);
+new Sortable(pickLettersDiv, {
+  group: 'shared', // set both lists to same group
+  animation: 150,
+});
 
-// function allowDrop(ev) {
-//   ev.preventDefault();
-// }
-
-// function drag(ev) {
-//   ev.dataTransfer.setData('text', ev.target.id);
-// }
-
-// function drop(ev) {
-//   ev.preventDefault();
-//   const data = ev.dataTransfer.getData('text');
-//   ev.target.appendChild(document.getElementById(data));
-//   scoring(); // This function counts the divs in the 'results' div
-// }
+new Sortable(resultsDiv, {
+  group: 'shared',
+  animation: 150,
+});
 
 // Loop through lettersArray and present results on screen - called by startGame & newLetters functions
 function pickLetters() {
@@ -167,12 +157,6 @@ function startTimer(duration, display) {
   }, 1000);
 }
 
-// Starts the game
-function startGame() {
-  pickLetters(); // pick the letters
-  startTimer(timeAllowed, display); // Start the timer
-}
-
 // Reset the letters but keep the timer going
 function newLetters() {
   i = 0;
@@ -182,18 +166,27 @@ function newLetters() {
   pickLetters(); // Reruns the pick letters array
 }
 
-// Calculate & update the score
-function scoring() {
-  const scoreP = document.getElementById('scoreP');
-  score = resultsDiv.getElementsByTagName('div').length; // Count the number of divs (tiles) in the results div
-  scoreP.innerHTML = `Score: ${score}`;
+// Starts the game
+function startGame() {
+  pickLetters(); // pick the letters
+  startTimer(timeAllowed, display); // Start the timer
+  drawLetterButton.style.backgroundColor = '#FFFFFF';
+  doneButton.style.backgroundColor = 'lightgreen';
 }
 
 // Get the word the player formed as a string - WIP
 function endWord() {
-  const letterDiv = resultsDiv.getElementsByTagName('div').length;
+  const playedNum = document.getElementById('results').querySelectorAll('.tile')
+    .length;
+  scoreP.innerHTML = `Score: ${playedNum}`;
+}
+
+function doneWithGame(playedNum) {
+  endWord();
 }
 
 drawLetterButton.addEventListener('click', startGame); // Button that starts the game (adds letters and starts timer)
 
 changeLetterButton.addEventListener('click', newLetters); // Button that adds letters but doens't restart the timer
+
+doneButton.addEventListener('click', doneWithGame); // Button the user clicks to signal they are done

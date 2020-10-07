@@ -14,10 +14,6 @@
         <div id="buttonDiv">
             <a class="myButton" id="pickLetterButton">Draw letters!</a>
         </div>
-        <div id="scoreDiv">
-            <p id="scoreP">Score: 0</p>
-            <!--score go here-->
-        </div>
         <div id="timerDiv">
             Time: <span id="time">01:46</span>
         </div>
@@ -25,23 +21,24 @@
             <!--Letters go here-->
         </div>
         <div id="results"></div>
-        <!-- <a class="myButton" id="newLettersButton">Draw letters!</a> -->
         <div id="links">
             <div id="redrawDiv">
                 <button id="redrawButton">Change letters</button>
             </div>
-            <div id="redrawDiv">
-                <a href="#" id="checkWord">Check word</a>
+            <div id="doneDiv">
+                <button id="doneButton">Done!</button>
+            </div>
+            <div id="scoreDiv">
+                <p id="scoreP">Score:</p>
             </div>
         </div>
         <div id="instructions">
             <p>Drag the letters in to the box to make the longest word you can.</p>
-            <p>Once you drop a letter you can't take it back.</p>
             <p>You have precisely one minute and 46 seconds to finish. If you're too slow... there are no real
                 consequences tbh</p>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="game.js"></script>
 </body>
 

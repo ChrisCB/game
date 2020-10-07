@@ -3,11 +3,13 @@
 https://qforquery.com/mae_game/game.html
 
 ## To Do
-- Render correctly on mobile
-- Allow take-backs
-- Allow dragging on mobile         
+- Stop the weird ghost on drag
+- Render on narrower viewports without horizontal scroll
+- Increase the height of the results container on narrow viewports if the player uses more than 4 tiles
+- Always have the tiles, and flip them over with a CSS transition
+- When the game starts, grey out the 'Draw letters!' button and make the 'Done' button green
 - Prevent moves after timer reaches 0
-- Allow redraw but keep timer going
+
 - Store actual word
     - Link to dictionary to check word
     - Add done button
@@ -21,5 +23,8 @@ https://qforquery.com/mae_game/game.html
 - Make timer red at 10 seconds
 - Weight probability of letters occurence by frequency in English
 - Change the redraw link to a button for accessiblity 
+- Allow redraw but keep timer going
+- Allow dragging on mobile
+- Allow take-backs
 
 
