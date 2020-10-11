@@ -28,7 +28,8 @@ h1 {
 
 #results {
     width: 80vw;
-    height: 70px;
+    overflow: auto;
+    min-height: 70px;
     padding: 10px;
     border: 2px solid #aaaaaa;
     margin-top: 15px;
