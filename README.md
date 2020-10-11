@@ -3,6 +3,7 @@
 https://qforquery.com/mae_game/game.html
 
 ## To Do
+- Make stopping the timer more elegant
 - Stop the weird ghost on drag
 - Render on narrower viewports without horizontal scroll
 - New titles visible on page-load, and flip them over with a CSS transition

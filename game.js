@@ -10,6 +10,7 @@ const resultsDiv = document.getElementById('results'); // The box you drag in to
 const changeLetterButton = document.getElementById('redrawButton'); // The link to get new letters
 const doneButton = document.getElementById('doneButton'); // The link to get new letters
 const scoreP = document.getElementById('scoreP');
+const highscoreP = document.getElementById('highscoreP');
 const displayTime = document.querySelector('#time');
 
 // Pick an individual letter. Probablity based on frequency of letter in English.
@@ -161,12 +162,30 @@ function endWord() {
   const finalScore = playedNum * timeAllowed;
   scoreP.innerHTML = `Score: ${finalScore} (${playedNum} letters * ${timeAllowed} seconds remaining) `;
   displayTime.style.display = 'none'; // This is horrible
+  if (finalScore > highScore) {
+    localStorage.setItem('highscore', finalScore);
+    highscoreP.innerHTML = `Highscore: ${finalScore} - a new record!`;
+    highscoreP.style.backgroundColor = 'lightgreen';
+  }
 }
 
 function doneWithGame(playedNum) {
   endWord();
-  clearInterval(callEverySecond); // Meant to stop setInterval, but doesn't work as it can't access the startGame() function.
+  // clearInterval(callEverySecond); // Meant to stop setInterval, but doesn't work as it can't access the startGame() function.
 }
+
+// Get & display current highscore
+let highScore = localStorage.getItem('highscore');
+if (highScore == null) {
+  highScore = 0;
+}
+highscoreP.innerHTML = `Highscore: ${highScore}`;
+
+// If new highscore is greater, overwrite it & add congrats message
+
+// Store
+
+// Retrieve
 
 // Event listeners on the button
 drawLetterButton.addEventListener('click', startGame); // Button that starts the game (adds letters and starts timer)
