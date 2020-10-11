@@ -9,6 +9,8 @@ const drawLetterButton = document.querySelector('#pickLetterButton'); // The "Dr
 const resultsDiv = document.getElementById('results'); // The box you drag in to
 const changeLetterButton = document.getElementById('redrawButton'); // The link to get new letters
 const doneButton = document.getElementById('doneButton'); // The link to get new letters
+const newGameButton = document.getElementById('newGameButton'); // The link to get new letters
+
 const scoreP = document.getElementById('scoreP');
 const highscoreP = document.getElementById('highscoreP');
 const displayTime = document.querySelector('#time');
@@ -181,13 +183,13 @@ if (highScore == null) {
 }
 highscoreP.innerHTML = `Highscore: ${highScore}`;
 
-// If new highscore is greater, overwrite it & add congrats message
-
-// Store
-
-// Retrieve
+// New Game
+function newGame() {
+  location.reload();
+}
 
 // Event listeners on the button
 drawLetterButton.addEventListener('click', startGame); // Button that starts the game (adds letters and starts timer)
 changeLetterButton.addEventListener('click', newLetters); // Button that adds letters but doens't restart the timer
+newGameButton.addEventListener('click', newGame); // Button the user clicks to signal they are done
 doneButton.addEventListener('click', doneWithGame); // Button the user clicks to signal they are done
