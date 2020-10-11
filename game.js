@@ -1,18 +1,16 @@
-/* eslint-disable no-new */
 // Define global variables
 const numOfLetters = 10; // How many letters to give the player
 const letterSelection = []; // empy selection array, gets defined in function
 let i = 0; // Iterator for loop to select letters
-const timeAllowed = 106; // How long the player has (controls )
-let timeBgColour = timeAllowed; // Drives the timer BG colour - see https://mothereffinghsl.com/
+let timeAllowed = 106; // How long the player has (controls )
 
-const display = document.querySelector('#time');
 const pickLettersDiv = document.getElementById('pickLettersDiv');
 const drawLetterButton = document.querySelector('#pickLetterButton'); // The "Draw letters buttom"
 const resultsDiv = document.getElementById('results'); // The box you drag in to
 const changeLetterButton = document.getElementById('redrawButton'); // The link to get new letters
 const doneButton = document.getElementById('doneButton'); // The link to get new letters
 const scoreP = document.getElementById('scoreP');
+const displayTime = document.querySelector('#time');
 
 // Pick an individual letter. Probablity based on frequency of letter in English.
 function pickLetter() {
@@ -104,16 +102,12 @@ function pickLetter() {
   newTile.id = `${letter}`; // Give the new div a unique ID
   newTile.className = 'tile'; // Give the new div a class of tile
   newTile.draggable = 'true'; // Add the 'draggable=true' attribute
-  // newTile.setAttribute('ondragstart', 'drag(event)'); // Add ondragstart="drag(event)
   newTile.innerHTML += letter; // Add the letter in to the tile
-
   pickLettersDiv.appendChild(newTile); // Add the tile in to the row of letters
-
   return letterSelection;
 }
 
 // // Make the letters draggable (via the Sortable CDN)
-
 new Sortable(pickLettersDiv, {
   group: 'shared', // set both lists to same group
   animation: 150,
@@ -133,28 +127,14 @@ function pickLetters() {
 }
 
 // Start the timer - called by startGame function
-function startTimer(duration, display) {
-  let timer = duration;
-  let minutes;
-  let seconds;
-  display = document.querySelector('#time');
-
-  setInterval(function () {
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);
-
-    minutes = minutes < 10 ? `0${minutes}` : minutes;
-    seconds = seconds < 10 ? `0${seconds}` : seconds;
-
-    display.style.backgroundColor = `hsl(${timeBgColour}, 75%, 50%)`;
-    display.textContent = `${minutes}:${seconds}`;
-
-    timeBgColour -= 1;
-
-    if (--timer < 0) {
-      timer = 0;
-    }
-  }, 1000);
+function gameTimer() {
+  timeAllowed -= 1;
+  displayTime.textContent = `${timeAllowed} seconds`;
+  displayTime.style.backgroundColor = `hsl(${timeAllowed}, 75%, 50%)`; // see https://mothereffinghsl.com/
+  if (timeAllowed <= 0) {
+    timeAllowed = 0;
+  }
+  return timeAllowed;
 }
 
 // Reset the letters but keep the timer going
@@ -169,7 +149,7 @@ function newLetters() {
 // Starts the game
 function startGame() {
   pickLetters(); // pick the letters
-  startTimer(timeAllowed, display); // Start the timer
+  const callEverySecond = setInterval(gameTimer, 1000);
   drawLetterButton.style.backgroundColor = '#FFFFFF';
   doneButton.style.backgroundColor = 'lightgreen';
 }
@@ -178,15 +158,17 @@ function startGame() {
 function endWord() {
   const playedNum = document.getElementById('results').querySelectorAll('.tile')
     .length;
-  scoreP.innerHTML = `Score: ${playedNum}`;
+  const finalScore = playedNum * timeAllowed;
+  scoreP.innerHTML = `Score: ${finalScore} (${playedNum} letters * ${timeAllowed} seconds remaining) `;
+  displayTime.style.display = 'none'; // This is horrible
 }
 
 function doneWithGame(playedNum) {
   endWord();
+  clearInterval(callEverySecond); // Meant to stop setInterval, but doesn't work as it can't access the startGame() function.
 }
 
+// Event listeners on the button
 drawLetterButton.addEventListener('click', startGame); // Button that starts the game (adds letters and starts timer)
-
 changeLetterButton.addEventListener('click', newLetters); // Button that adds letters but doens't restart the timer
-
 doneButton.addEventListener('click', doneWithGame); // Button the user clicks to signal they are done
