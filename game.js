@@ -150,13 +150,9 @@ function startGame() {
   // window.timeAllowed = 106; // How long the player has
   displayTime.style.display = 'inline'; // This is horrible
   pickLetters(); // pick the letters
-  // if (timeAllowed < 106) {
-  //   clearInterval(callEverySecond);
-  // }
   callEverySecond = setInterval(gameTimer, 1000);
   drawLetterButton.style.backgroundColor = '#FFFFFF';
   doneButton.style.backgroundColor = 'lightgreen';
-  console.log(timeAllowed);
 }
 
 // Get the word the player formed as a string - WIP & Calculate the highscore
@@ -165,6 +161,7 @@ function endWord() {
     .length;
   const finalScore = playedNum * timeAllowed;
   scoreP.innerHTML = `Score: ${finalScore} (${playedNum} letters * ${timeAllowed} seconds remaining) `;
+
   displayTime.style.display = 'none'; // This is horrible
   if (finalScore > highScore) {
     localStorage.setItem('highscore', finalScore);
@@ -174,9 +171,15 @@ function endWord() {
 }
 
 function doneWithGame(playedNum) {
+  // Endword calculates the result
   endWord();
+  // Reset timers - ugly
+  timeAllowed = 106;
+  clearInterval(callEverySecond);
+  // Reset the button
   drawLetterButton.style.backgroundColor = 'lightgreen';
   doneButton.style.backgroundColor = 'white';
+  newLetters();
 }
 
 // Get & display current highscore
