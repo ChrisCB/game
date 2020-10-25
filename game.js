@@ -2,15 +2,12 @@
 const numOfLetters = 10; // How many letters to give the player
 const letterSelection = []; // empy selection array, gets defined in function
 let i = 0; // Iterator for loop to select letters
-let timeAllowed = 106; // How long the player has (controls )
-
+let timeAllowed = 106; // How long the player has
 const pickLettersDiv = document.getElementById('pickLettersDiv');
 const drawLetterButton = document.querySelector('#pickLetterButton'); // The "Draw letters buttom"
 const resultsDiv = document.getElementById('results'); // The box you drag in to
 const changeLetterButton = document.getElementById('redrawButton'); // The link to get new letters
 const doneButton = document.getElementById('doneButton'); // The link to get new letters
-const newGameButton = document.getElementById('newGameButton'); // The link to get new letters
-
 const scoreP = document.getElementById('scoreP');
 const highscoreP = document.getElementById('highscoreP');
 const displayTime = document.querySelector('#time');
@@ -104,7 +101,6 @@ function pickLetter() {
   const newTile = document.createElement('DIV'); // Create a div for the new tile
   newTile.id = `${letter}`; // Give the new div a unique ID
   newTile.className = 'tile'; // Give the new div a class of tile
-  newTile.draggable = 'true'; // Add the 'draggable=true' attribute
   newTile.innerHTML += letter; // Add the letter in to the tile
   pickLettersDiv.appendChild(newTile); // Add the tile in to the row of letters
   return letterSelection;
@@ -151,13 +147,19 @@ function newLetters() {
 
 // Starts the game
 function startGame() {
+  // window.timeAllowed = 106; // How long the player has
+  displayTime.style.display = 'inline'; // This is horrible
   pickLetters(); // pick the letters
-  const callEverySecond = setInterval(gameTimer, 1000);
+  // if (timeAllowed < 106) {
+  //   clearInterval(callEverySecond);
+  // }
+  callEverySecond = setInterval(gameTimer, 1000);
   drawLetterButton.style.backgroundColor = '#FFFFFF';
   doneButton.style.backgroundColor = 'lightgreen';
+  console.log(timeAllowed);
 }
 
-// Get the word the player formed as a string - WIP
+// Get the word the player formed as a string - WIP & Calculate the highscore
 function endWord() {
   const playedNum = document.getElementById('results').querySelectorAll('.tile')
     .length;
@@ -173,7 +175,8 @@ function endWord() {
 
 function doneWithGame(playedNum) {
   endWord();
-  // clearInterval(callEverySecond); // Meant to stop setInterval, but doesn't work as it can't access the startGame() function.
+  drawLetterButton.style.backgroundColor = 'lightgreen';
+  doneButton.style.backgroundColor = 'white';
 }
 
 // Get & display current highscore
@@ -183,13 +186,7 @@ if (highScore == null) {
 }
 highscoreP.innerHTML = `Highscore: ${highScore}`;
 
-// New Game
-function newGame() {
-  location.reload();
-}
-
 // Event listeners on the button
 drawLetterButton.addEventListener('click', startGame); // Button that starts the game (adds letters and starts timer)
 changeLetterButton.addEventListener('click', newLetters); // Button that adds letters but doens't restart the timer
-newGameButton.addEventListener('click', newGame); // Button the user clicks to signal they are done
 doneButton.addEventListener('click', doneWithGame); // Button the user clicks to signal they are done
