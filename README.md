@@ -16,7 +16,7 @@ https://qforquery.com/mae_game/game.html
 
 
 ## Done
-- Score
+- Scoring
 - End timer at 0
 - Make timer red at 10 seconds
 - Weight probability of letters occurence by frequency in English
